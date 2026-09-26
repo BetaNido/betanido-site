@@ -1,165 +1,521 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BetaNido | Biostatistical Research Consulting</title>
-<meta name="description" content="Biostatistical design, analysis, and predictive modeling for clinical investigators and research programs, from the IRB statistical section to the published result. Established 2013.">
-<meta name="robots" content="index,follow">
-<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%278%27%20fill%3D%27%232f2f3b%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2730%27%20text-anchor%3D%27middle%27%20font-family%3D%27Helvetica%2CArial%2Csans-serif%27%20font-weight%3D%27700%27%20font-size%3D%2728%27%20fill%3D%27%23f1f1f5%27%3EB%3C/text%3E%3Ctext%20x%3D%2732%27%20y%3D%2758%27%20text-anchor%3D%27middle%27%20font-family%3D%27Helvetica%2CArial%2Csans-serif%27%20font-weight%3D%27700%27%20font-size%3D%2728%27%20fill%3D%27%23f6c12f%27%3EN%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Since 2013, BetaNido has been a research collaborator to clinical and academic investigators, serving research teams nationwide.">
+<script>
+  /* ============================================================
+     BOOKING URL -- Google Calendar booking page (short link). Change it here only.
+     ============================================================ */
+  var BOOKING_URL = "https://calendar.app.google/6KqbT7GyLRgmirp56";
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("a[data-booking]").forEach(function (a) {
+      a.href = BOOKING_URL; a.target = "_blank"; a.rel = "noopener";
+      a.addEventListener("click", function (e) { if (window.top !== window.self) { e.preventDefault(); window.open(BOOKING_URL, "_blank", "noopener"); } });
+    });
+  });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1b2530; --ink-soft:#4b5a68; --accent:#0d5c6b; --accent-dark:#094752;
-    --bg:#ffffff; --bg-alt:#f3f6f7; --rule:#dbe3e6; --btn-text:#ffffff;
+    --ink:#2f2f3b; --bar:#46465e; --panel:#40405a; --deep:#34343f; --card:#4a4a64;
+    --text:#f1f1f5; --soft:#d3d3de; --line:rgba(241,241,245,.14);
+    --gold:#f6c12f; --gold-hi:#ffd35a; --gold-ink:#1d1d26;
+    --font:"Figtree","Avenir Next","Avenir","Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ink:#e8edf0; --ink-soft:#aab6bf; --accent:#5fc0cf; --accent-dark:#8ad6e2;
-      --bg:#0f161b; --bg-alt:#161f26; --rule:#26323b; --btn-text:#0f161b;
-    }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--deep);color:var(--text);font-family:var(--font);font-weight:300;font-size:18px;line-height:1.6;overflow-x:hidden}
+  a{color:var(--text);text-underline-offset:3px}
+  a:hover{color:var(--gold-hi)}
+  strong{font-weight:500;color:#fff}
+  h1,h2,h3{font-weight:400;line-height:1.2;margin:0;text-wrap:balance}
+  p{margin:0;text-wrap:pretty}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+  .btn{display:inline-block;background:var(--gold);color:var(--gold-ink);text-decoration:none;font-weight:500;letter-spacing:.05em;padding:13px 30px;line-height:1.3;text-align:center;transition:background .15s}
+  .btn:hover{background:var(--gold-hi);color:var(--gold-ink)}
+  .kicker{font-size:14px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+  .topbar{position:sticky;top:0;z-index:20;background:var(--ink);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;gap:40px;height:68px;max-width:1360px}
+  .topbar .brand{font-size:26px;font-weight:400;letter-spacing:.01em;text-decoration:none;color:var(--text)}
+  .topbar .brand{display:flex;align-items:baseline;gap:0}
+  .topbar .brand{font-weight:600;letter-spacing:-.005em}
+  .brand .nido,.hero-name .nido{color:var(--gold)}
+  .topbar .brand .tld{font-weight:400;font-size:.55em;color:var(--soft);letter-spacing:.02em;margin-left:1px}
+  .topbar .tagline{font-size:15px;color:var(--soft);white-space:nowrap;letter-spacing:.02em}
+  .topbar nav a{padding:6px 0;border-bottom:2px solid transparent}
+  .topbar nav a:hover{border-bottom-color:var(--gold);color:#fff}
+  .hero-name{font-size:clamp(26px,2.4vw,34px);font-weight:600;color:#fff;margin:0;letter-spacing:.01em}
+  @media (max-width:1200px){.topbar .tagline{display:none}}
+  #services{padding-top:56px}
+  .topbar nav{flex:1}
+  .topbar nav ul{list-style:none;margin:0;padding:0;display:flex;gap:30px}
+  .topbar nav a{text-decoration:none;font-size:16px;font-weight:400}
+  .topbar .btn{font-size:14.5px;padding:11px 22px;flex-shrink:0}
+  /* header (legacy) */
+  .masthead{background:var(--ink)}
+  .masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:36px;padding-bottom:40px}
+  .brand{font-size:clamp(22px,3vw,36px);text-decoration:none;color:var(--text);display:flex;flex-wrap:wrap;gap:0 .45em}
+  .brand:hover{color:var(--text)}
+  .masthead .btn{font-size:15px;flex-shrink:0}
+  nav.bar{background:var(--bar);position:sticky;top:0;z-index:10}
+  nav.bar ul{list-style:none;margin:0 auto;max-width:1160px;padding:0 32px;display:flex;gap:28px}
+  nav.bar a{display:block;padding:12px 0;text-decoration:none;font-size:17px;font-weight:400}
+
+  /* hero */
+  .hero{background:var(--panel);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .art{position:relative;background:#2b2b3a;overflow:hidden}
+  .art svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero .art{min-height:520px}
+  .hero-copy{padding:40px clamp(24px,4vw,64px);text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px}
+  .hero-copy h1{font-size:clamp(32px,3.3vw,46px);font-style:italic}
+  .hero-copy .lede{font-size:19px;max-width:24em;color:var(--soft)}
+  .cta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 20px;margin-top:8px}
+
+  /* proof strip */
+  .strip{background:var(--ink);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .strip ul{list-style:none;margin:0 auto;max-width:1160px;padding:0 32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .strip li{padding:16px 16px;text-align:center;display:flex;flex-direction:column;gap:4px}
+  .strip li + li{border-left:1px solid var(--line)}
+  .strip b{font-weight:500;font-size:18px;color:#fff}
+  .strip span{font-size:15px;color:var(--soft)}
+
+  section.band{padding:96px 0}
+  section.alt{background:var(--panel)}
+  .sec-head{text-align:center;margin:0 auto 52px;display:flex;flex-direction:column;gap:14px;align-items:center}
+  .sec-head h2{font-size:clamp(28px,3.4vw,42px)}
+
+  /* services */
+  .svc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+  .svc article{background:var(--panel);padding:32px 26px;display:flex;flex-direction:column;gap:14px}
+  .svc svg{width:40px;height:40px}
+  .svc h3{font-size:21px;font-weight:500}
+  .svc p{color:var(--soft);font-size:17px}
+
+  /* settings */
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .card{text-align:center;display:flex;flex-direction:column;gap:10px}
+  .card .art{aspect-ratio:16/7;margin-bottom:10px}
+  .card h3{font-size:18px;text-transform:uppercase;letter-spacing:.05em}
+  .card p{color:var(--soft)}
+  .fields{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:18px}
+  .fields ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+  .fields li{border:1px solid rgba(241,241,245,.3);padding:7px 16px;font-size:16px}
+
+  #settings{padding:64px 0}
+  #settings .sec-head{margin-bottom:32px}
+  .practice{display:flex;flex-direction:column;gap:14px}
+  .practice h2{font-size:clamp(28px,3vw,38px)}
+  .why{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+  .principal{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;align-items:center}
+  .principal .art{aspect-ratio:1;border-radius:50%}
+  .principal h2{font-size:28px;margin:8px 0 10px}
+  .principal p{color:var(--soft)}
+  blockquote{margin:0;border-top:2px solid var(--gold);padding-top:28px}
+  blockquote p{font-size:clamp(24px,2.6vw,32px);line-height:1.35;font-weight:300;color:#fff}
+  blockquote .rigor-head{font-size:clamp(34px,3.6vw,48px);line-height:1.15;font-weight:400;color:#fff;margin:0}
+  blockquote p.rigor-sub{font-size:clamp(19px,1.7vw,22px);line-height:1.45;font-weight:300;color:var(--soft);margin-top:16px}
+  blockquote footer{margin-top:18px;font-size:15px;color:var(--soft);letter-spacing:.04em}
+
+  /* contact */
+  .contact{background:var(--ink);position:relative;overflow:hidden;text-align:center}
+  .contact .bg{position:absolute;inset:0;width:100%;height:100%}
+  .contact .wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px}
+  .contact h2{font-size:clamp(30px,3.8vw,46px)}
+  .contact p{font-size:20px;color:var(--soft);max-width:30em}
+
+  footer.site{background:var(--deep);border-top:1px solid var(--line);padding:56px 0 48px;text-align:center}
+  footer.site .wrap{display:flex;flex-direction:column;gap:8px;align-items:center}
+  footer.site p{color:var(--soft)}
+  footer.site .name{font-size:20px;color:var(--text)}
+  footer.site .copy{font-size:14px;margin-top:18px}
+
+  @media (max-width:980px){
+    .svc{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .strip ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .strip li:nth-child(3){border-left:0}
+    .strip li:nth-child(n+3){border-top:1px solid var(--line)}
+    .why{grid-template-columns:minmax(0,1fr);gap:48px}
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;
-    font-size:1.0625rem;
+  @media (max-width:820px){
+    .hero{grid-template-columns:minmax(0,1fr)}
+    .hero .art{min-height:220px}
+    .cards{grid-template-columns:minmax(0,1fr);max-width:460px;margin:0 auto}
+    .masthead .btn{display:none}
   }
-  .skip{position:absolute;left:-999px;top:0;background:var(--accent);color:var(--btn-text);padding:.5rem .75rem}
-  .skip:focus{left:.5rem;top:.5rem;z-index:10}
-  .wrap{max-width:44rem;margin:0 auto;padding:0 1.25rem}
-  header.hero{padding:3.5rem 0 3rem;border-bottom:1px solid var(--rule)}
-  @media(min-width:640px){header.hero{padding:5rem 0 4rem}}
-  .brand{font-size:1rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-  .descriptor{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:.3rem}
-  h1{font-size:clamp(1.75rem,5.5vw,2.5rem);line-height:1.2;font-weight:700;margin-top:1.75rem;max-width:34rem;letter-spacing:-.01em}
-  .hero p.sub{margin-top:1.1rem;font-size:1.1rem;color:var(--ink-soft);max-width:36rem}
-  .cta-row{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.9rem 1.25rem;align-items:center}
-  a.btn{display:inline-block;background:var(--accent);color:var(--btn-text);text-decoration:none;
-        padding:.85rem 1.5rem;border-radius:6px;font-weight:600;font-size:1rem;line-height:1.2}
-  a.btn:hover,a.btn:focus-visible{background:var(--accent-dark);outline:none}
-  a.btn:focus-visible{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent)}
-  .cta-row .alt{font-size:.95rem;color:var(--ink-soft)}
-  a.inline{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
-  a.inline:hover{color:var(--accent-dark)}
-  section{padding:2.75rem 0;border-bottom:1px solid var(--rule)}
-  @media(min-width:640px){section{padding:3.5rem 0}}
-  section.alt{background:var(--bg-alt)}
-  h2{font-size:1.35rem;font-weight:700;margin-bottom:1.25rem;letter-spacing:-.01em}
-  .lede{font-size:1.05rem;color:var(--ink-soft);max-width:38rem;margin-bottom:1.5rem}
-  .services{display:grid;gap:1.4rem}
-  @media(min-width:640px){.services{grid-template-columns:1fr 1fr;gap:1.75rem 2rem}}
-  .svc h3{font-size:1.02rem;font-weight:700;margin-bottom:.35rem;color:var(--accent-dark)}
-  .svc p{font-size:.97rem;color:var(--ink-soft)}
-  .prose p{margin-bottom:1rem;max-width:40rem}
-  .prose p:last-child{margin-bottom:0}
-  .studentline{margin-top:1.5rem;padding:.9rem 1.1rem;background:var(--bg);
-    border-left:3px solid var(--accent);font-size:.95rem;border-radius:0 6px 6px 0;color:var(--ink-soft)}
-  .cred{display:grid;gap:1.4rem}
-  @media(min-width:640px){.cred{grid-template-columns:1fr 1fr;gap:1.75rem 2rem}}
-  .cred h3{font-size:1rem;font-weight:700;margin-bottom:.3rem;color:var(--accent-dark)}
-  .cred p{font-size:.95rem;color:var(--ink-soft)}
-  section.closing{border-bottom:none}
-  footer{padding:2rem 0 3rem;border-top:1px solid var(--rule);font-size:.85rem;color:var(--ink-soft)}
-  footer p{margin-bottom:.3rem}
-  @media print{a.btn{border:1px solid #000;color:#000;background:#fff} .skip{display:none}}
+  @media (max-width:560px){
+    body{font-size:17px}
+    .wrap,.strip ul,nav.bar ul{padding-left:20px;padding-right:20px}
+    nav.bar ul{gap:22px}
+    .masthead .wrap{padding-top:24px;padding-bottom:24px}
+    .brand{flex-direction:column}
+    .brand .sep{display:none}
+    .brand .desc{font-size:.6em;color:var(--soft)}
+    section.band{padding:64px 0}
+    .hero-copy{padding:48px 20px}
+    .hero-copy .lede,.contact p{font-size:18px}
+    .cta-row{flex-direction:column;width:100%}
+    .cta-row .btn{width:100%;padding:13px 12px;letter-spacing:.02em}
+    .svc{grid-template-columns:minmax(0,1fr)}
+    .strip li{padding:20px 8px}
+    .strip b{font-size:17px}
+    .principal{grid-template-columns:88px minmax(0,1fr);gap:18px}
+  }
+
+  /* ---------- sample deliverables (shared) ---------- */
+  .paper{background:#f5f4ef;color:#23232d;font-family:var(--font);padding:26px 30px 24px;box-shadow:0 24px 60px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:14px}
+  .paper-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .paper-cap{font-size:15px;line-height:1.35;color:#23232d;font-weight:400}
+  .paper-cap b{font-weight:600}
+  .ill{flex-shrink:0;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#5c5c6b;border:1px solid #9a9aa8;padding:3px 8px;white-space:nowrap}
+  .paper svg.fig{width:100%;height:auto;display:block;overflow:visible}
+  .paper svg text{font-family:var(--font);fill:#23232d}
+  .paper .note{font-size:12px;color:#5c5c6b;line-height:1.4}
+  .t1{width:100%;border-collapse:collapse;font-size:14.5px;line-height:1.3;border-top:1.5px solid #23232d;border-bottom:1.5px solid #23232d}
+  .t1 th{font-weight:600;text-align:right;padding:8px 6px;border-bottom:1px solid #23232d;vertical-align:bottom}
+  .t1 th:first-child,.t1 td:first-child{text-align:left}
+  .t1 td{padding:7px 6px;text-align:right;font-variant-numeric:tabular-nums}
+  .t1 td:first-child{padding-left:6px}
+  .t1 tr.sub td:first-child{padding-left:20px}
+  .t1 tbody tr{opacity:0;transform:translateY(4px);transition:opacity .45s ease,transform .45s ease}
+  .play .t1 tbody tr{opacity:1;transform:none}
+  .doc{font-family:"Source Serif 4",Georgia,serif;font-size:15.5px;line-height:1.55;color:#23232d;padding:6px 18px 0;column-count:1}
+  .doc h4{font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px;color:#40405a}
+  .doc p{margin:0 0 10px}
+  .doc .s{opacity:0;display:inline;transition:opacity .45s ease}
+  .play .doc .s{opacity:1}
+  .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1)}
+  .play .draw{stroke-dashoffset:0}
+  .fade{opacity:0;transition:opacity .5s ease}
+  .play .fade{opacity:1}
+  .grow{transform-box:fill-box;transform-origin:center;transform:scaleX(0);transition:transform .55s cubic-bezier(.3,.7,.3,1)}
+  .play .grow{transform:scaleX(1)}
+  @media (prefers-reduced-motion:reduce){.draw,.fade,.grow,.t1 tbody tr,.doc .s{transition:none!important}}
+
+  .hero-a{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .hero-a .hero-copy{text-align:left;align-items:flex-start}
+  .hero-a .cta-row{justify-content:flex-start}
+  .showcase{position:relative;background:#2b2b3a;padding:28px clamp(24px,3.5vw,56px) 22px;display:flex;flex-direction:column;gap:14px;justify-content:center;
+    background-image:linear-gradient(rgba(241,241,245,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(241,241,245,.05) 1px,transparent 1px);background-size:40px 40px}
+  .stage{position:relative;height:min(520px,calc(100vh - 420px));min-height:440px}
+  .slide .paper svg.fig{flex:1 1 auto;min-height:0;height:100%}
+  .slide .paper{padding:22px 28px 18px;gap:12px}
+  .slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease,visibility 0s .5s}
+  .slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .5s ease,transform .5s ease}
+  .slide .paper{height:100%}
+  .ctrl{display:flex;align-items:center;gap:18px}
+  .tabs{display:flex;gap:6px;flex:1;flex-wrap:wrap}
+  .tabs button{background:none;border:0;border-top:2px solid rgba(241,241,245,.25);color:var(--soft);font:inherit;font-size:14px;padding:8px 4px 0;cursor:pointer;flex:1;text-align:left;position:relative}
+  .tabs button:hover{color:#fff}
+  .tabs button[aria-selected="true"]{color:#fff}
+  .tabs button .bar{position:absolute;top:-2px;right:0;height:2px;width:0;background:var(--gold)}
+  .arrows{display:flex;gap:8px}
+  .arrows button{width:40px;height:40px;border:1px solid rgba(241,241,245,.35);background:none;color:var(--text);cursor:pointer;display:grid;place-items:center}
+  .arrows button:hover{border-color:var(--gold);color:var(--gold)}
 </style>
 </head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
+<body id="top">
 
-<header class="hero">
+<header class="topbar">
   <div class="wrap">
-    <div class="brand">BetaNido</div>
-    <div class="descriptor">Biostatistical Research Consulting</div>
-    <h1>Studies that finish. Results you can defend.</h1>
-    <p class="sub">Biostatistical design, analysis, and predictive modeling for clinical investigators and research programs, from the IRB statistical section to the published result. Established 2013.</p>
-    <div class="cta-row">
-      <a class="btn" href="https://calendar.app.google/f3mVDopxWCLmdev76">Schedule a free consultation</a>
-      <span class="alt">or email <a class="inline" href="mailto:admin@betanido.com?subject=Consultation%20inquiry">admin@betanido.com</a></span>
-    </div>
+    <a class="brand" href="#top" aria-label="BetaNido.com home">Beta<span class="nido">Nido</span><span class="tld">.com</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <span class="tagline">Biostatistical Research Consulting</span>
+    <a class="btn" data-booking href="https://calendar.app.google/6KqbT7GyLRgmirp56" target="_blank" rel="noopener">Schedule a free 30-minute consultation</a>
   </div>
 </header>
 
-<main id="main">
+<main>
+  <div class="strip" aria-label="At a glance">
+    <ul>
+      <li><b>Since 2013</b><span>An established practice</span></li>
+      <li><b>Senior statisticians</b><span>20+ years of experience each</span></li>
+      <li><b>Peer-reviewed</b><span>Published, and publishing</span></li>
+      <li><b>STROBE · CONSORT · TRIPOD+AI</b><span>Reporting standards</span></li>
+    </ul>
+  </div>
 
-<section>
-  <div class="wrap">
-    <h2>What we do</h2>
-    <p class="lede">Most research stalls in the same two places: the design was never powered for the question, or the data arrived and nobody had time to make it a result. We take projects at either point and stay through publication.</p>
-    <div class="services">
-      <div class="svc">
-        <h3>Study design and power</h3>
-        <p>Sample-size justification, power and sensitivity analysis, and the statistical sections your IRB protocol and grant application need, written to survive review.</p>
+  <section class="hero hero-a" aria-labelledby="h-hero">
+    <div class="hero-copy">
+      <p class="hero-name">Beta<span class="nido">Nido</span></p>
+      <h1 id="h-hero">Biostatistical Research Consulting</h1>
+      <p class="lede">A research collaborator to junior researchers, tenured faculty, and institutional investigators.</p>
+      <div class="cta-row">
+        <a class="btn" data-booking href="https://calendar.app.google/6KqbT7GyLRgmirp56" target="_blank" rel="noopener">Schedule a free 30-minute consultation</a>
       </div>
-      <div class="svc">
-        <h3>Analysis and reporting</h3>
-        <p>From analysis plan to final results. Rigorous methods, publication-ready tables and figures, and findings reported to journal standards in language your team can defend to reviewers and leadership.</p>
+      <p>or email <a href="mailto:hello@betanido.com" target="_blank" rel="noopener">hello@betanido.com</a></p>
+    </div>
+    <div class="showcase" tabindex="0" aria-roledescription="carousel" aria-label="Illustrative deliverable samples">
+      <div class="stage">
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 5: Table 1"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Table 1.</b> Baseline Characteristics of Participants</p><span class="ill">Illustrative example</span></div>
+  <table class="t1"><thead><tr><th>Characteristic</th><th>Intervention<br>(n = 142)</th><th>Control<br>(n = 138)</th></tr></thead><tbody>
+  <tr><td>Age, mean (SD), y</td><td>58.4 (11.2)</td><td>57.9 (10.8)</td></tr>
+  <tr><td>Female, No. (%)</td><td>78 (54.9)</td><td>74 (53.6)</td></tr>
+  <tr><td>BMI, mean (SD)</td><td>29.1 (5.4)</td><td>28.7 (5.9)</td></tr>
+  <tr><td>Current smoker, No. (%)</td><td>31 (21.8)</td><td>29 (21.0)</td></tr>
+  <tr><td>Comorbidity, No. (%)</td><td></td><td></td></tr>
+  <tr class="sub"><td>Hypertension</td><td>64 (45.1)</td><td>60 (43.5)</td></tr>
+  <tr class="sub"><td>Diabetes</td><td>38 (26.8)</td><td>35 (25.4)</td></tr>
+  </tbody></table>
+  <p class="note">Abbreviation: BMI, body mass index (calculated as weight in kilograms divided by height in meters squared). Synthetic data.</p></div></div>
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 5: Forest plot"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 2.</b> Odds of the Primary Outcome, by Subgroup</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="forest" viewBox="0 0 600 380"></svg><p class="note">Error bars indicate 95% CIs. Synthetic data.</p></div></div>
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 5: Power curve"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 3.</b> Statistical Power by Sample Size per Group</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="power" viewBox="0 0 600 380"></svg><p class="note">Two-sided α = .05; standardized effect size d. Synthetic scenario.</p></div></div>
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 5: Survival curve"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 4.</b> Kaplan-Meier Estimates of Event-Free Survival</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="km" viewBox="0 0 600 380"></svg><p class="note">Tick marks indicate censored observations. Synthetic data.</p></div></div>
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="5 of 5: Methods" data-dur="8000"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Methods</b> (excerpt)</p><span class="ill">Illustrative example</span></div><div class="doc"><h4>Statistical Analysis</h4>
+  <p><span class="s" data-b="0">Baseline characteristics were summarized as mean (SD) for continuous variables and No. (%) for categorical variables.</span></p>
+  <p><span class="s" data-b="1">The primary outcome was analyzed with multivariable logistic regression adjusted for age, sex, and baseline comorbidity; results are reported as odds ratios with 95% CIs.</span> <span class="s" data-b="2">Time to first event was estimated with the Kaplan-Meier method and compared with Cox proportional hazards models, with the proportional hazards assumption assessed by Schoenfeld residuals.</span></p>
+  <p><span class="s" data-b="3">A sample of 280 participants provided 80% power to detect a standardized difference of 0.34 at a 2-sided α of .05. Missing covariate data were handled by multiple imputation.</span></p>
+</div></div></div>
       </div>
-      <div class="svc">
-        <h3>Manuscripts and grants</h3>
-        <p>Methods and results sections drafted for submission, statistical responses to peer review, and a named statistician for your grant and program budgets so funded work keeps moving.</p>
-      </div>
-      <div class="svc">
-        <h3>Predictive models and program analytics</h3>
-        <p>Risk and outcome models built to current reporting standards, validated honestly, and delivered with the documentation and workflow fit that let a program actually use them.</p>
+      <div class="ctrl">
+        <div class="tabs" role="tablist"><button role="tab" aria-selected="false"><span class="bar"></span>Table 1</button><button role="tab" aria-selected="false"><span class="bar"></span>Forest plot</button><button role="tab" aria-selected="false"><span class="bar"></span>Power curve</button><button role="tab" aria-selected="false"><span class="bar"></span>Survival curve</button><button role="tab" aria-selected="false"><span class="bar"></span>Methods</button></div>
+        <div class="arrows"><button data-prev aria-label="Previous sample"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L5 8l5 5"/></svg></button><button data-next aria-label="Next sample"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3l5 5-5 5"/></svg></button></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="alt">
-  <div class="wrap prose">
-    <h2>Who we serve</h2>
-    <p>Institutional investigators, research directors, and clinical research programs, from a first nurse-led study to multi-site work. Our experience spans orthopedics, nursing, emergency medical services, pharmacy, pediatrics, and diagnostic medicine.</p>
-    <p>Research programs work with us on a standing basis, so a completed study is not a one-time event. Individual investigators work with us on a single project at a time. Both begin with the same conversation.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Why BetaNido</h2>
-    <div class="cred">
-      <div>
-        <h3>Twelve-plus years of continuity</h3>
-        <p>An established practice since 2013, with client relationships that have outlasted successive research directors and study programs.</p>
+  <section class="band" id="services" aria-labelledby="h-svc">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Services</p>
+        <h2 id="h-svc">What we do</h2>
       </div>
-      <div>
-        <h3>Principal-led, start to finish</h3>
-        <p>Every engagement is led by our Founder and Principal, a PhD, MPH statistician and former nursing-school biostatistics faculty member, who still designs and runs the analyses himself.</p>
-      </div>
-      <div>
-        <h3>Published, and publishing</h3>
-        <p>A peer-reviewed record of more than forty publications in medication adherence, chronic-disease self-management, and health economics. We hold our clients' work to the same standard.</p>
-      </div>
-      <div>
-        <h3>Rigor you can cite</h3>
-        <p>Reporting aligned to established standards, including STROBE, CONSORT, and TRIPOD+AI, with reproducible, documented analyses. When our numbers differ from a reference engine, we document why rather than smooth it over.</p>
+      <div class="svc">
+        <article>
+          <svg viewBox="0 0 40 40" fill="none" stroke="#f6c12f" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="20" r="15"/><circle cx="20" cy="20" r="8"/><circle cx="20" cy="20" r="1.8" fill="#f6c12f"/></svg>
+          <h3>Study design and power</h3>
+          <p>Sample size, power, and the statistics your IRB protocol and grant need.</p>
+        </article>
+        <article>
+          <svg viewBox="0 0 40 40" fill="none" stroke="#f6c12f" stroke-width="1.6" aria-hidden="true"><path d="M5 35H35"/><rect x="8" y="22" width="5" height="13"/><rect x="17.5" y="14" width="5" height="21"/><rect x="27" y="6" width="5" height="29"/></svg>
+          <h3>Analysis and reporting</h3>
+          <p>From analysis plan to publication-ready tables, figures, and results.</p>
+        </article>
+        <article>
+          <svg viewBox="0 0 40 40" fill="none" stroke="#f6c12f" stroke-width="1.6" aria-hidden="true"><rect x="8" y="4" width="24" height="32"/><path d="M13 12H27M13 18H27M13 24H22"/></svg>
+          <h3>Manuscripts and grants</h3>
+          <p>Methods and results sections, reviewer responses, and a named statistician in your budget.</p>
+        </article>
+        <article>
+          <svg viewBox="0 0 40 40" fill="none" stroke="#f6c12f" stroke-width="1.6" aria-hidden="true"><path d="M6 32L16 20L24 25L34 9"/><circle cx="6" cy="32" r="2.2"/><circle cx="16" cy="20" r="2.2"/><circle cx="24" cy="25" r="2.2"/><circle cx="34" cy="9" r="2.2"/></svg>
+          <h3>Predictive models and program analytics</h3>
+          <p>Risk and outcome models built to current reporting standards, validated honestly.</p>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="alt closing">
-  <div class="wrap prose">
-    <h2>Start a conversation</h2>
-    <p>Tell us where your project stands. A brief consultation is free, and we'll tell you honestly whether we're the right fit.</p>
-    <div class="cta-row">
-      <a class="btn" href="https://calendar.app.google/f3mVDopxWCLmdev76">Schedule a free consultation</a>
-      <span class="alt">or email <a class="inline" href="mailto:admin@betanido.com?subject=Consultation%20inquiry">admin@betanido.com</a></span>
+  <section class="band alt" id="settings" aria-labelledby="h-set">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="h-set">Where the work sits</h2></div>
+      <div class="cards">
+        <article class="card">
+          <!-- PHOTO SLOT -- Patrick may supply his own image -->
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 500 320" preserveAspectRatio="xMidYMid slice"><rect width="500" height="320" fill="#2b2b3a"/><g stroke="#f1f1f5" stroke-opacity=".08"><path d="M0 64H500M0 128H500M0 192H500M0 256H500M100 0V320M200 0V320M300 0V320M400 0V320"/></g><path d="M40 270 C140 270 180 70 250 70 C320 70 360 270 460 270" fill="#f6c12f" fill-opacity=".12" stroke="#f6c12f" stroke-opacity=".7" stroke-width="2"/><line x1="250" y1="70" x2="250" y2="270" stroke="#f1f1f5" stroke-opacity=".4" stroke-dasharray="5 5"/><line x1="40" y1="270" x2="460" y2="270" stroke="#f1f1f5" stroke-opacity=".3"/></svg>
+          </div>
+          <h3>Academic</h3>
+          <p>Manuscripts and grants, from dissertation-stage question to funded program.</p>
+        </article>
+        <article class="card">
+          <!-- PHOTO SLOT -- Patrick may supply his own image -->
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 500 320" preserveAspectRatio="xMidYMid slice"><rect width="500" height="320" fill="#2b2b3a"/><g stroke="#f1f1f5" stroke-opacity=".08"><path d="M0 64H500M0 128H500M0 192H500M0 256H500M100 0V320M200 0V320M300 0V320M400 0V320"/></g><polyline points="50,70 50,110 130,110 130,150 220,150 220,190 300,190 300,210 390,210 390,240 460,240" fill="none" stroke="#f1f1f5" stroke-opacity=".6" stroke-width="2"/><polyline points="50,70 50,90 130,90 130,110 220,110 220,125 300,125 300,140 390,140 390,150 460,150" fill="none" stroke="#f6c12f" stroke-opacity=".75" stroke-width="2"/><line x1="50" y1="270" x2="460" y2="270" stroke="#f1f1f5" stroke-opacity=".3"/></svg>
+          </div>
+          <h3>Clinical</h3>
+          <p>Protocol statistics, clinical studies, and publications.</p>
+        </article>
+        <article class="card">
+          <!-- PHOTO SLOT -- Patrick may supply his own image -->
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 500 320" preserveAspectRatio="xMidYMid slice"><rect width="500" height="320" fill="#2b2b3a"/><g stroke="#f1f1f5" stroke-opacity=".08"><path d="M0 64H500M0 128H500M0 192H500M0 256H500M100 0V320M200 0V320M300 0V320M400 0V320"/></g><line x1="60" y1="250" x2="450" y2="70" stroke="#f6c12f" stroke-opacity=".7" stroke-width="2"/><g fill="#f1f1f5" fill-opacity=".55"><circle cx="80" cy="235" r="5"/><circle cx="110" cy="255" r="5"/><circle cx="140" cy="215" r="5"/><circle cx="170" cy="205" r="5"/><circle cx="195" cy="225" r="5"/><circle cx="225" cy="180" r="5"/><circle cx="255" cy="195" r="5"/><circle cx="280" cy="155" r="5"/><circle cx="310" cy="145" r="5"/><circle cx="335" cy="160" r="5"/><circle cx="365" cy="115" r="5"/><circle cx="395" cy="105" r="5"/><circle cx="425" cy="80" r="5"/></g><line x1="50" y1="270" x2="460" y2="270" stroke="#f1f1f5" stroke-opacity=".3"/></svg>
+          </div>
+          <h3>Industry</h3>
+          <p>Outcome measurement and program evaluation for public and private organizations.</p>
+        </article>
+      </div>
+      <div class="fields">
+        <p class="kicker">Experience across</p>
+        <ul>
+          <li>Orthopedics</li><li>Nursing</li><li>Emergency medicine</li><li>Pharmacy</li><li>Pediatrics</li><li>Diagnostic medicine</li><li>Other specialties</li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <section class="band" id="why-betanido" aria-labelledby="h-why">
+    <div class="wrap why">
+      <div class="practice">
+        <p class="kicker">Why BetaNido</p>
+        <h2 id="h-why">Senior statisticians design and run every analysis.</h2>
+      </div>
+      <blockquote>
+        <p class="rigor-head">Rigor you can cite</p>
+        <p class="rigor-sub">Every number we report traces back to the data and the code that produced it.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="band contact" id="contact" aria-labelledby="h-contact">
+    <!-- PHOTO SLOT -- Patrick may supply his own image -->
+    <svg class="bg" aria-hidden="true" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="g2" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#f1f1f5" stroke-opacity=".06"/></pattern></defs>
+      <rect width="1200" height="500" fill="url(#g2)"/>
+      <polyline points="0,420 150,390 300,400 450,340 600,350 750,280 900,260 1050,200 1200,170" fill="none" stroke="#f6c12f" stroke-opacity=".2" stroke-width="2"/>
+    </svg>
+    <div class="wrap">
+      <h2 id="h-contact">Start a conversation</h2>
+      <p>Tell us where your project stands. You leave the call with a clear next step and confidence in your research plan.</p>
+      <div class="cta-row">
+        <a class="btn" data-booking href="https://calendar.app.google/6KqbT7GyLRgmirp56" target="_blank" rel="noopener">Schedule a free 30-minute consultation</a>
+      </div>
+      <p>or email <a href="mailto:hello@betanido.com" target="_blank" rel="noopener">hello@betanido.com</a></p>
+    </div>
+  </section>
 </main>
 
-<footer>
+<footer class="site">
   <div class="wrap">
-    <p>BetaNido LLC &middot; Biostatistical Research Consulting</p>
-    <p>Pittsburgh based, serving research teams nationwide.</p>
-    <p>&copy; 2026 BetaNido LLC</p>
+    <p class="name"><strong>BetaNido LLC</strong> | Biostatistical Research Consulting</p>
+    <p>Serving research teams nationwide.</p>
+    <p><a href="mailto:hello@betanido.com" target="_blank" rel="noopener">hello@betanido.com</a></p>
+    <p class="copy">&copy; 2026 BetaNido LLC</p>
   </div>
 </footer>
 
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg", INK="#23232d", MUT="#6a6a78", A="#40405a", B="#c08a12";
+  function el(p,n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;p.appendChild(e);return e}
+  function forest(s){
+    var rows=[["Overall",0.78,0.64,0.95,1],["Age, y",0,0,0,2],["  <65",0.74,0.57,0.96],["  ≥65",0.84,0.62,1.14],["Sex",0,0,0,2],["  Female",0.76,0.57,1.01],["  Male",0.81,0.61,1.08],["Diabetes",0,0,0,2],["  Yes",0.71,0.49,1.03],["  No",0.82,0.65,1.04]];
+    var L=Math.log, x0=230,w=230, lo=0.4,hi=1.6, X=function(v){return x0+(L(v)-L(lo))/(L(hi)-L(lo))*w};
+    el(s,"text",{x:0,y:14,"font-size":13,"font-weight":600},"Subgroup");
+    el(s,"text",{x:600,y:14,"font-size":13,"font-weight":600,"text-anchor":"end"},"OR (95% CI)");
+    el(s,"line",{x1:0,x2:600,y1:24,y2:24,stroke:INK,"stroke-width":1});
+    var y=46, top=30, i=0;
+    rows.forEach(function(r){
+      var g=el(s,"g",{});
+      el(g,"text",{x:r[0].indexOf("  ")===0?16:0,y:y+4,"font-size":13.5,"font-weight":r[4]===1?600:400},r[0].trim());
+      if(r[4]!==2){
+        var d=(0.15+i*0.14)+"s";
+        if(r[4]===1){
+          el(g,"polygon",{points:[X(r[2]),y,X(r[1]),y-7,X(r[3]),y,X(r[1]),y+7].join(" "),fill:A,class:"grow",style:"transition-delay:"+d});
+        } else {
+          el(g,"line",{x1:X(r[2]),x2:X(r[3]),y1:y,y2:y,stroke:INK,"stroke-width":1.5,class:"grow",style:"transition-delay:"+d});
+          el(g,"rect",{x:X(r[1])-4.5,y:y-4.5,width:9,height:9,fill:A,class:"fade",style:"transition-delay:"+d});
+        }
+        el(g,"text",{x:600,y:y+4,"font-size":13.5,"text-anchor":"end",class:"fade",style:"font-variant-numeric:tabular-nums;transition-delay:"+d},r[1].toFixed(2)+" ("+r[2].toFixed(2)+"-"+r[3].toFixed(2)+")");
+        i++;
+      }
+      if(r[4]===1){el(s,"line",{x1:0,x2:600,y1:y+14,y2:y+14,stroke:"#b9b9c2","stroke-width":1});y+=8}
+      y+=28;
+    });
+    var ay=y-6;
+    el(s,"line",{x1:X(1),x2:X(1),y1:top,y2:ay,stroke:INK,"stroke-width":1});
+    el(s,"line",{x1:x0,x2:x0+w,y1:ay,y2:ay,stroke:INK,"stroke-width":1});
+    [0.5,0.75,1,1.5].forEach(function(t){el(s,"line",{x1:X(t),x2:X(t),y1:ay,y2:ay+5,stroke:INK});el(s,"text",{x:X(t),y:ay+19,"font-size":12,"text-anchor":"middle"},String(t))});
+    el(s,"text",{x:X(1)-8,y:ay+38,"font-size":12,"text-anchor":"end",fill:MUT},"← Favors intervention");
+    el(s,"text",{x:X(1)+8,y:ay+38,"font-size":12,fill:MUT},"Favors control →");
+  }
+  function axes(s,x0,x1,y0,y1,xt,yt,xl,yl,fx,fy){
+    el(s,"line",{x1:x0,x2:x1,y1:y1,y2:y1,stroke:INK});el(s,"line",{x1:x0,x2:x0,y1:y0,y2:y1,stroke:INK});
+    xt.forEach(function(t){el(s,"line",{x1:fx(t),x2:fx(t),y1:y1,y2:y1+5,stroke:INK});el(s,"text",{x:fx(t),y:y1+19,"font-size":12,"text-anchor":"middle"},String(t))});
+    yt.forEach(function(t){el(s,"line",{x1:x0-5,x2:x0,y1:fy(t),y2:fy(t),stroke:INK});el(s,"text",{x:x0-9,y:fy(t)+4,"font-size":12,"text-anchor":"end"},t.toFixed(1))});
+    if(xl)el(s,"text",{x:(x0+x1)/2,y:y1+40,"font-size":13,"text-anchor":"middle"},xl);
+    el(s,"text",{x:0,y:0,"font-size":13,"text-anchor":"middle",transform:"translate("+(x0-44)+" "+((y0+y1)/2)+") rotate(-90)"},yl);
+  }
+  function Phi(z){var t=1/(1+0.2316419*Math.abs(z)),d=0.3989423*Math.exp(-z*z/2),p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return z>0?1-p:p}
+  function power(s){
+    var x0=70,x1=560,y0=16,y1=318,fx=function(n){return x0+n/300*(x1-x0)},fy=function(p){return y1-p*(y1-y0)};
+    [0.2,0.4,0.6,0.8,1].forEach(function(t){el(s,"line",{x1:x0,x2:x1,y1:fy(t),y2:fy(t),stroke:"#dcdcd4"})});
+    axes(s,x0,x1,y0,y1,[0,50,100,150,200,250,300],[0,0.2,0.4,0.6,0.8,1],"Sample size per group, No.","Power",fx,fy);
+    el(s,"line",{x1:x0,x2:x1,y1:fy(.8),y2:fy(.8),stroke:INK,"stroke-dasharray":"4 4"});
+    [[0.5,A],[0.4,"#6f6f8f"],[0.3,B]].forEach(function(c,k){
+      var d="";for(var n=2;n<=300;n+=2){var p=Phi(c[0]*Math.sqrt(n/2)-1.96);d+=(n===2?"M":"L")+fx(n).toFixed(1)+" "+fy(p).toFixed(1)}
+      el(s,"path",{d:d,fill:"none",stroke:c[1],"stroke-width":2.2,pathLength:1,class:"draw",style:"transition-delay:"+(0.1+k*0.25)+"s"});
+      var n80=2*Math.pow(2.8016/c[0],2);
+      el(s,"circle",{cx:fx(n80),cy:fy(.8),r:4.5,fill:c[1],class:"fade",style:"transition-delay:"+(1.3+k*0.2)+"s"});
+      el(s,"text",{x:fx(n80)+7,y:fy(.8)+18,"font-size":12,class:"fade",style:"transition-delay:"+(1.3+k*0.2)+"s"},"n = "+Math.ceil(n80));
+      var lp=Phi(c[0]*Math.sqrt(150)-1.96);
+      el(s,"line",{x1:x1-110,x2:x1-86,y1:fy(.42)+k*20,y2:fy(.42)+k*20,stroke:c[1],"stroke-width":2.2});el(s,"text",{x:x1-78,y:fy(.42)+k*20+4,"font-size":12.5},"d = "+c[0]);
+    });
+    el(s,"text",{x:x0+8,y:fy(.8)-7,"font-size":12,fill:MUT},"80% power");
+  }
+  function rng(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
+  function km(s){
+    var x0=110,x1=560,y0=12,y1=250,fx=function(t){return x0+t/36*(x1-x0)},fy=function(p){return y1-p*(y1-y0)};
+    [0.2,0.4,0.6,0.8,1].forEach(function(t){el(s,"line",{x1:x0,x2:x1,y1:fy(t),y2:fy(t),stroke:"#dcdcd4"})});
+    axes(s,x0,x1,y0,y1,[0,6,12,18,24,30,36],[0,0.2,0.4,0.6,0.8,1],null,"Event-free probability",fx,fy);
+    el(s,"text",{x:(x0+x1)/2,y:y1+38,"font-size":13,"text-anchor":"middle"},"Time since enrollment, mo");
+    [[142,0.0095,A,11,"Intervention"],[138,0.0165,B,29,"Control"]].forEach(function(g,k){
+      var r=rng(g[3]),n=g[0],S=1,t=0,d="M"+fx(0)+" "+fy(1),ticks=[];
+      while(t<36&&n>10){
+        t+= -Math.log(1-r())/(n*(g[1]+0.012));
+        if(t>36)break;
+        if(r()<g[1]/(g[1]+0.012)){S*=1-1/n;d+="H"+fx(t).toFixed(1)+"V"+fy(S).toFixed(1)}else{ticks.push([t,S])}
+        n--;
+      }
+      d+="H"+fx(36);
+      el(s,"path",{d:d,fill:"none",stroke:g[2],"stroke-width":2.2,pathLength:1,class:"draw",style:"transition-delay:"+(0.1+k*0.25)+"s"});
+      ticks.forEach(function(c,j){if(j%3===0)el(s,"line",{x1:fx(c[0]),x2:fx(c[0]),y1:fy(c[1])-4,y2:fy(c[1])+4,stroke:g[2],"stroke-width":1.3,class:"fade",style:"transition-delay:1.5s"})});
+      el(s,"line",{x1:x0+270,x2:x0+294,y1:y0+170+k*20,y2:y0+170+k*20,stroke:g[2],"stroke-width":2.2});
+      el(s,"text",{x:x0+302,y:y0+174+k*20,"font-size":12.5},g[4]);
+    });
+    var ry=y1+62;
+    el(s,"text",{x:0,y:ry,"font-size":12,"font-weight":600},"No. at risk");
+    [["Intervention",[142,131,118,104,97,84,71]],["Control",[138,122,104,92,79,66,55]]].forEach(function(g,k){
+      var yy=ry+18+k*17;
+      el(s,"text",{x:0,y:yy,"font-size":12,fill:k?B:A,"font-weight":600},g[0]);
+      g[1].forEach(function(v,j){el(s,"text",{x:fx(j*6),y:yy,"font-size":12,"text-anchor":"middle",style:"font-variant-numeric:tabular-nums"},String(v))});
+    });
+  }
+  window.BN_FIGS={forest:forest,power:power,km:km};
+  document.querySelectorAll("svg[data-fig]").forEach(function(s){window.BN_FIGS[s.dataset.fig](s)});
+  document.querySelectorAll(".t1 tbody tr").forEach(function(r,i){r.style.transitionDelay=(0.1+i*0.12)+"s"});
+  document.querySelectorAll(".doc .s").forEach(function(sp){sp.style.transitionDelay=(0.2+(+sp.dataset.b)*0.8)+"s"});
+})();
+(function(){
+  var root=document.querySelector(".showcase"); if(!root)return;
+  var slides=[].slice.call(root.querySelectorAll(".slide")), tabs=[].slice.call(root.querySelectorAll(".tabs button"));
+  var cur=0, DUR=4000, D=function(){return +(slides[cur].dataset.dur||DUR)}, timer=null, t0=0, left=DUR, paused=false, passes=0, done=false;
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function show(i,user){
+    slides[cur].classList.remove("on","play"); tabs[cur].setAttribute("aria-selected","false"); tabs[cur].querySelector(".bar").style.width="0";
+    cur=(i+slides.length)%slides.length;
+    slides[cur].classList.add("on"); tabs[cur].setAttribute("aria-selected","true");
+    var s=slides[cur];setTimeout(function(){s.classList.add("play")},40);
+    if(user)done=true;
+    left=D(); schedule();
+  }
+  function schedule(){
+    clearTimeout(timer); var bar=tabs[cur].querySelector(".bar");
+    if(done||reduce){bar.style.transition="none";bar.style.width="100%";return}
+    if(paused)return;
+    t0=Date.now(); bar.style.transition="none"; bar.style.width=(left/D()*100)+"%";
+    void bar.offsetWidth;bar.style.transition="width "+left+"ms linear";bar.style.width="0";
+    timer=setTimeout(function(){ show(cur+1) },left);
+  }
+  root.addEventListener("mouseenter",function(){if(done)return;paused=true;clearTimeout(timer);left-=Date.now()-t0;var b=tabs[cur].querySelector(".bar");b.style.width=getComputedStyle(b).width;b.style.transition="none"});
+  root.addEventListener("mouseleave",function(){paused=false;schedule()});
+  tabs.forEach(function(b,i){b.addEventListener("click",function(){show(i,true)})});
+  root.querySelector("[data-prev]").addEventListener("click",function(){show(cur-1,true)});
+  root.querySelector("[data-next]").addEventListener("click",function(){show(cur+1,true)});
+  root.addEventListener("keydown",function(e){if(e.key==="ArrowRight")show(cur+1,true);if(e.key==="ArrowLeft")show(cur-1,true)});
+  show(0);
+})();</script>
 </body>
 </html>
