@@ -256,16 +256,16 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
   <tr class="sub"><td>Diabetes</td><td>38 (26.8)</td><td>35 (25.4)</td></tr>
   </tbody></table>
   <p class="note">Abbreviation: BMI, body mass index (calculated as weight in kilograms divided by height in meters squared). Synthetic data.</p></div></div>
-        <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 5: Forest plot"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 2.</b> Odds of the Primary Outcome, by Subgroup</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="forest" viewBox="0 0 600 380"></svg><p class="note">Error bars indicate 95% CIs. Synthetic data.</p></div></div>
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="2 of 5: Lowering cost"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 2.</b> Cost per Member per Month, Program vs Matched Comparison</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="did" viewBox="0 0 600 380"></svg><p class="note">Index, baseline = 100. Difference-in-differences adjusted for age, sex and risk score. Synthetic data.</p></div></div>
         <div class="slide" role="group" aria-roledescription="slide" aria-label="3 of 5: Power curve"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 3.</b> Statistical Power by Sample Size per Group</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="power" viewBox="0 0 600 380"></svg><p class="note">Two-sided α = .05; standardized effect size d. Synthetic scenario.</p></div></div>
-        <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 5: Survival curve"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 4.</b> Kaplan-Meier Estimates of Event-Free Survival</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="km" viewBox="0 0 600 380"></svg><p class="note">Tick marks indicate censored observations. Synthetic data.</p></div></div>
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 5: Risk mitigation"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Figure 4.</b> Share of Avoidable Events Captured by Outreach Volume</p><span class="ill">Illustrative example</span></div><svg class="fig" data-fig="cap" viewBox="0 0 600 380"></svg><p class="note">Members ranked by predicted risk. Dashed line: outreach in no particular order. Synthetic data.</p></div></div>
         <div class="slide" role="group" aria-roledescription="slide" aria-label="5 of 5: Methods"><div class="paper"><div class="paper-head"><p class="paper-cap"><b>Methods</b> (excerpt)</p><span class="ill">Illustrative example</span></div><div class="doc"><h4>Statistical Analysis</h4>
   <p>Baseline characteristics were summarized as mean (SD) for continuous variables and No. (%) for categorical variables.</p>
   <p>The primary outcome was analyzed with multivariable logistic regression adjusted for age, sex, and baseline comorbidity; results are reported as odds ratios with 95% CIs. Time to first event was estimated with the Kaplan-Meier method and compared with Cox proportional hazards models, with the proportional hazards assumption assessed by Schoenfeld residuals.</p>
   <p>A sample of 280 participants provided 80% power to detect a standardized difference of 0.34 at a 2-sided α of .05. Missing covariate data were handled by multiple imputation.</p></div></div></div>
       </div>
       <div class="ctrl">
-        <div class="tabs" role="tablist"><button role="tab" aria-selected="false"><span class="bar"></span>Table 1</button><button role="tab" aria-selected="false"><span class="bar"></span>Forest plot</button><button role="tab" aria-selected="false"><span class="bar"></span>Power curve</button><button role="tab" aria-selected="false"><span class="bar"></span>Survival curve</button><button role="tab" aria-selected="false"><span class="bar"></span>Methods</button></div>
+        <div class="tabs" role="tablist"><button role="tab" aria-selected="false"><span class="bar"></span>Table 1</button><button role="tab" aria-selected="false"><span class="bar"></span>Lowering cost</button><button role="tab" aria-selected="false"><span class="bar"></span>Power curve</button><button role="tab" aria-selected="false"><span class="bar"></span>Risk mitigation</button><button role="tab" aria-selected="false"><span class="bar"></span>Methods</button></div>
         <div class="arrows"><button data-prev aria-label="Previous sample"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3L5 8l5 5"/></svg></button><button data-next aria-label="Next sample"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3l5 5-5 5"/></svg></button></div>
       </div>
       </div>
@@ -422,7 +422,49 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
       g[1].forEach(function(v,j){el(s,"text",{x:fx(j*6),y:yy,"font-size":12,"text-anchor":"middle",style:"font-variant-numeric:tabular-nums"},String(v))});
     });
   }
-  window.BN_FIGS={forest:forest,power:power,km:km};
+
+  function did(s){
+    var x0=70,x1=560,y0=20,y1=290,qs=["Q-4","Q-3","Q-2","Q-1","Q1","Q2","Q3","Q4"];
+    var fx=function(i){return x0+(i+0.5)/8*(x1-x0)},fy=function(v){return y1-(v-88)/(106-88)*(y1-y0)};
+    [90,95,100,105].forEach(function(t){el(s,"line",{x1:x0,x2:x1,y1:fy(t),y2:fy(t),stroke:"#dcdcd4"})});
+    el(s,"line",{x1:x0,x2:x1,y1:y1,y2:y1,stroke:INK});el(s,"line",{x1:x0,x2:x0,y1:y0,y2:y1,stroke:INK});
+    [90,95,100,105].forEach(function(t){el(s,"text",{x:x0-9,y:fy(t)+4,"font-size":12,"text-anchor":"end"},String(t))});
+    qs.forEach(function(q,i){el(s,"text",{x:fx(i),y:y1+19,"font-size":12,"text-anchor":"middle"},q)});
+    el(s,"text",{x:(x0+x1)/2,y:y1+40,"font-size":13,"text-anchor":"middle"},"Quarter relative to program launch");
+    el(s,"text",{x:0,y:0,"font-size":13,"text-anchor":"middle",transform:"translate(26 "+((y0+y1)/2)+") rotate(-90)"},"Cost index");
+    var lx=(fx(3)+fx(4))/2; el(s,"line",{x1:lx,x2:lx,y1:y0,y2:y1,stroke:MUT,"stroke-dasharray":"4 4"});
+    el(s,"text",{x:lx+6,y:y0+12,"font-size":12,fill:MUT},"Program launch");
+    var comp=[100.4,99.6,100.2,99.8,100.9,101.3,101.0,101.6], prog=[100.1,100.3,99.7,100.0,98.2,96.6,95.9,95.7];
+    [[comp,"#9aa7bd","Matched comparison"],[prog,A,"Program"]].forEach(function(g,k){
+      var d=g[0].map(function(v,i){return (i?"L":"M")+fx(i).toFixed(1)+" "+fy(v).toFixed(1)}).join("");
+      el(s,"path",{d:d,fill:"none",stroke:g[1],"stroke-width":2.4,pathLength:1,class:"draw",style:"transition-delay:"+(0.1+k*0.3)+"s"});
+      g[0].forEach(function(v,i){el(s,"circle",{cx:fx(i),cy:fy(v),r:3.2,fill:g[1],class:"fade",style:"transition-delay:"+(1.1+k*0.2)+"s"})});
+      el(s,"line",{x1:x0+20,x2:x0+44,y1:y1-48+k*20,y2:y1-48+k*20,stroke:g[1],"stroke-width":2.4});
+      el(s,"text",{x:x0+52,y:y1-44+k*20,"font-size":12.5},g[2]);
+    });
+    el(s,"text",{x:x1,y:fy(97.6),"font-size":13,"font-weight":600,"text-anchor":"end",class:"fade",style:"transition-delay:1.6s"},"Adjusted savings: 4.8%");
+    el(s,"text",{x:x1,y:fy(97.6)+17,"font-size":12,"text-anchor":"end",fill:MUT,class:"fade",style:"transition-delay:1.6s"},"95% CI, 1.6% to 8.0%");
+  }
+  function cap(s){
+    var x0=70,x1=560,y0=16,y1=300,fx=function(p){return x0+p/100*(x1-x0)},fy=function(p){return y1-p/100*(y1-y0)};
+    [20,40,60,80,100].forEach(function(t){el(s,"line",{x1:x0,x2:x1,y1:fy(t),y2:fy(t),stroke:"#dcdcd4"})});
+    el(s,"line",{x1:x0,x2:x1,y1:y1,y2:y1,stroke:INK});el(s,"line",{x1:x0,x2:x0,y1:y0,y2:y1,stroke:INK});
+    [0,25,50,75,100].forEach(function(t){el(s,"line",{x1:fx(t),x2:fx(t),y1:y1,y2:y1+5,stroke:INK});el(s,"text",{x:fx(t),y:y1+19,"font-size":12,"text-anchor":"middle"},t+"%")});
+    [0,20,40,60,80,100].forEach(function(t){el(s,"text",{x:x0-9,y:fy(t)+4,"font-size":12,"text-anchor":"end"},t+"%")});
+    el(s,"text",{x:(x0+x1)/2,y:y1+40,"font-size":13,"text-anchor":"middle"},"Share of eligible members reached");
+    el(s,"text",{x:0,y:0,"font-size":13,"text-anchor":"middle",transform:"translate(22 "+((y0+y1)/2)+") rotate(-90)"},"Avoidable events captured");
+    el(s,"line",{x1:fx(0),x2:fx(100),y1:fy(0),y2:fy(100),stroke:MUT,"stroke-dasharray":"5 5"});
+    var a=Math.log(0.6)/Math.log(0.25), d="";
+    for(var p=0;p<=100;p+=2){var y=100*Math.pow(p/100,a);d+=(p?"L":"M")+fx(p).toFixed(1)+" "+fy(y).toFixed(1)}
+    el(s,"path",{d:d,fill:"none",stroke:A,"stroke-width":2.6,pathLength:1,class:"draw",style:"transition-delay:.1s"});
+    el(s,"line",{x1:fx(25),x2:fx(25),y1:fy(0),y2:fy(60),stroke:B,"stroke-dasharray":"3 3",class:"fade",style:"transition-delay:1.2s"});
+    el(s,"line",{x1:fx(0),x2:fx(25),y1:fy(60),y2:fy(60),stroke:B,"stroke-dasharray":"3 3",class:"fade",style:"transition-delay:1.2s"});
+    el(s,"circle",{cx:fx(25),cy:fy(60),r:5,fill:B,class:"fade",style:"transition-delay:1.3s"});
+    el(s,"text",{x:fx(25)+10,y:fy(60)+18,"font-size":13,"font-weight":600,class:"fade",style:"transition-delay:1.4s"},"Reach 25%, capture 60%");
+    el(s,"text",{x:fx(72),y:fy(56),"font-size":12,fill:MUT},"Unranked outreach");
+    el(s,"text",{x:fx(6),y:fy(90),"font-size":12.5,fill:A},"Ranked by predicted risk");
+  }
+  window.BN_FIGS={forest:forest,power:power,km:km,did:did,cap:cap};
   document.querySelectorAll("svg[data-fig]").forEach(function(s){window.BN_FIGS[s.dataset.fig](s)});
   document.querySelectorAll(".t1 tbody tr").forEach(function(r,i){r.style.transitionDelay=(0.1+i*0.12)+"s"});
   document.querySelectorAll(".doc p").forEach(function(p,i){p.style.transitionDelay=(0.1+i*0.35)+"s"});
