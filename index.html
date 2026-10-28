@@ -214,6 +214,10 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
     #work{padding-top:22px}
     #work .h2row{margin-bottom:10px}
   }
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-cta{margin-top:24px}
+  .claims{grid-template-columns:repeat(2,minmax(0,1fr));max-width:820px;gap:18px 32px}
+  @media (max-width:560px){.claims{grid-template-columns:minmax(0,1fr)}.hero-cta{margin-top:18px}}
 </style>
 </head>
 <body id="top">
@@ -244,12 +248,8 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
           <div class="claim"><b>Measured, not asserted.</b><span>Comparison groups, adjusted savings, models checked before anyone relies on them.</span></div>
           <div class="claim"><b>Experienced leaders do the work.</b><span>20 years each in healthcare analytics and research.</span></div>
         </div>
+        <a class="btn hero-cta" data-booking href="https://calendar.app.google/6KqbT7GyLRgmirp56" target="_blank" rel="noopener">Book a 30-minute Call</a>
       </div>
-      <aside class="panel" aria-label="How engagements run">
-        <span class="mono">How engagements run</span>
-        <ul><li>Focused sprints</li><li>Ongoing and fractional leadership</li><li>Research projects</li></ul>
-        <a class="btn" data-booking href="https://calendar.app.google/6KqbT7GyLRgmirp56" target="_blank" rel="noopener">Book a 30-minute Call</a>
-      </aside>
     </div>
   </section>
 
@@ -333,7 +333,7 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
         <p>Tell us where your project stands.</p>
         <a class="btn" data-booking href="https://calendar.app.google/6KqbT7GyLRgmirp56" target="_blank" rel="noopener">Book a 30-minute Call</a>
         <p class="trust">Client identities stay confidential. Mutual NDA on request.</p>
-        <p>or email <a href="mailto:hello@betanido.com">hello@betanido.com</a></p>
+        <p>or email <a href="mailto:hello@betanido.com" target="_blank" rel="noopener">hello@betanido.com</a></p>
       </div>
     </div>
   </section>
@@ -342,7 +342,7 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
 <footer class="site">
   <div class="wrap foot">
     <span><strong>BetaNido LLC</strong> | Biostatistical Research Consulting</span>
-    <span class="links"><a href="mailto:hello@betanido.com">hello@betanido.com</a></span>
+    <span class="links"><a href="mailto:hello@betanido.com" target="_blank" rel="noopener">hello@betanido.com</a></span>
     <span class="svc-line">Serving health organizations and research teams nationwide. &copy; 2026 BetaNido LLC</span>
   </div>
 </footer>
