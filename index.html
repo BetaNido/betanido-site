@@ -261,6 +261,8 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
   .qd-head h2{font-size:24px;min-width:0}
   .qd .qd-close{width:auto;flex-shrink:0;padding:8px 14px;font-size:14px}
   .qd-intro{padding:8px 22px 0;color:var(--gray);font-size:15px}
+  /* r35: the one line under the form */
+  .qd-note{margin:0;padding:0 22px 20px;color:var(--gray);font-size:14px}
   .qf{display:flex;flex-direction:column;gap:18px;padding:18px 22px 24px;margin:0}
   .qf-field{display:flex;flex-direction:column;gap:6px;min-width:0;margin:0;padding:0;border:0}
   .qf-field > label,.qf legend{font-weight:700;font-size:15px;line-height:1.3;padding:0}
@@ -285,7 +287,7 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
   .qf-status{font-size:15px;line-height:1.45;padding:12px 14px;border:1px solid var(--rule);border-left:3px solid var(--navy);background:#eef4fb;overflow-wrap:anywhere}
   .qf-status.warn{border-left-color:var(--gold);background:#fdf6e3}
   .qf-status a{font-weight:700}
-  @media (max-width:560px){.qd-head{padding:16px 16px 0}.qd-intro{padding:8px 16px 0}.qf{padding:16px 16px 20px}.qd-head h2{font-size:22px}}
+  @media (max-width:560px){.qd-head{padding:16px 16px 0}.qd-intro{padding:8px 16px 0}.qd-note{padding:0 16px 16px}.qf{padding:16px 16px 20px}.qd-head h2{font-size:22px}}
 </style>
 </head>
 <body id="top">
@@ -495,6 +497,7 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
     </div>
     <div class="qf-status" id="qf-status" role="status" aria-live="polite"></div>
   </form>
+  <p class="qd-note">Please don't include patient information.</p>
 </dialog>
 
 <script>
@@ -668,7 +671,9 @@ footer.site{border-top:1px solid var(--rule);padding:28px 0 36px;font-size:14px;
   } else { slides[0].classList.add("play"); }
 })();</script>
 <script>
-/* r32: Request a quote. The endpoint and the fallback address live here only. */
+/* r32: Request a quote. The endpoint and the fallback address live here only.
+   r35 (run of 2026-11-01d): the server now keeps the request and sends a receipt; the page adds the
+   line under the form and refuses patient information before sending, as the server does. */
 const QUOTE_ENDPOINT = "https://api.betanido.com/quote";
 const QUOTE_FALLBACK_EMAIL = "hello@betanido.com";
 (function(){
@@ -725,12 +730,30 @@ const QUOTE_FALLBACK_EMAIL = "hello@betanido.com";
     }
     return false;
   }
-  /* The same two patterns the server refuses: an email address, or a 13 to 19 digit run that passes Luhn. */
+  /* r35: the patient-information patterns the server refuses (a Social Security number, a medical
+     record number, a labelled date of birth), so a refused request is never sent on in the prepared
+     email either. No lookbehind: an older browser that cannot parse one would lose the whole form. */
+  var PHI_DATE = "(?:\\d{1,2}[/.\\-]\\d{1,2}[/.\\-]\\d{2,4}|\\d{4}-\\d{1,2}-\\d{1,2}" +
+    "|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\\.?\\s+\\d{1,2},?\\s+\\d{4}" +
+    "|\\d{1,2}\\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\\.?,?\\s+\\d{4})";
+  var PHI = [
+    ["a Social Security number", new RegExp("(?:^|[^\\d\\-])\\d{3}([\\- .])\\d{2}\\1\\d{4}(?![\\d\\-])" +
+      "|\\b(?:ssn|social\\s+security(?:\\s+(?:number|no\\.?|#))?)\\s*[:#]?\\s*\\d{9}\\b", "i")],
+    ["a medical record number", new RegExp("\\b(?:mrn|mr\\s*#|mr\\s+no\\.?|medical\\s+record(?:\\s+(?:number|no\\.?|#))?" +
+      "|patient\\s+(?:id|identifier|number|no\\.?|#)|chart\\s+(?:number|no\\.?|#))\\s*[:#]?\\s*[a-z]{0,3}\\d{4,}", "i")],
+    ["a date of birth", new RegExp("\\b(?:dob|d\\.o\\.b\\.?|date\\s+of\\s+birth|birth\\s*date|born(?:\\s+on)?)\\s*[:\\-]?\\s*" + PHI_DATE, "i")]
+  ];
+  function phiMessage(hint, where){ return "Please remove " + hint + " from " + where + "; this form must not carry patient information."; }
+  /* The same patterns the server refuses: an email address, a 13 to 19 digit run that passes Luhn,
+     and (r35) patient information. `message` is for the description; `fieldMessage` for name or organization. */
   function check(text){
     text = String(text == null ? "" : text);
-    if (EMAIL_RE.test(text)) return {ok: false, kind: "email", message: ID_MSG};
-    if (hasCardNumber(text)) return {ok: false, kind: "card", message: ID_MSG};
-    return {ok: true, kind: null, message: ""};
+    if (EMAIL_RE.test(text)) return {ok: false, kind: "email", message: ID_MSG, fieldMessage: ID_FIELD_MSG};
+    if (hasCardNumber(text)) return {ok: false, kind: "card", message: ID_MSG, fieldMessage: ID_FIELD_MSG};
+    for (var p = 0; p < PHI.length; p++){
+      if (PHI[p][1].test(text)) return {ok: false, kind: "patient", message: phiMessage(PHI[p][0], "the project description"), fieldMessage: phiMessage(PHI[p][0], "this field")};
+    }
+    return {ok: true, kind: null, message: "", fieldMessage: ""};
   }
 
   var dlg = document.getElementById("quote-dialog");
@@ -847,8 +870,8 @@ const QUOTE_FALLBACK_EMAIL = "hello@betanido.com";
     setErr("description", "");
     var other = ["name", "organization"].filter(function(k){ return !check(d[k]).ok; });
     if (other.length){
-      other.forEach(function(k){ setErr(k, ID_FIELD_MSG); });
-      setStatus(ID_FIELD_MSG, "warn"); controlsOf(other[0])[0].focus(); return;
+      other.forEach(function(k){ setErr(k, check(d[k]).fieldMessage); });
+      setStatus(check(d[other[0]]).fieldMessage, "warn"); controlsOf(other[0])[0].focus(); return;
     }
     busy = true; submitBtn.disabled = true;
     setStatus("Sending your request.");
